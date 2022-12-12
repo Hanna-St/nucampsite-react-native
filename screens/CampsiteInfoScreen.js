@@ -1,11 +1,11 @@
 import RenderCampsite from '../features/campsites/RenderCampsite';
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { COMMENTS } from '../shared/comments';
+import { useSelector } from 'react-redux';
 
 const CampsiteInfoScreen = ({ route }) => {
     const { campsite } = route.params;
-    const [comments, setComments] = useState(COMMENTS);
+    const comments = useSelector((state) => state.comments);
     const [favorite, setFavorite] = useState(false);
   
     const renderCommentItem = ({ item }) => {
@@ -20,7 +20,7 @@ const CampsiteInfoScreen = ({ route }) => {
 
     return (
         <FlatList
-            data={comments.filter(
+            data={comments.commentsArray.filter(
                 (comment) => comment.campsiteId === campsite.id
             )}
             renderItem={renderCommentItem}
