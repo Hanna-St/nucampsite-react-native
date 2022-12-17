@@ -9,30 +9,34 @@ const RenderCampsite = (props) => {
             <Card containerStyle={styles.cardContainer}>
                 <Card.Image source={{ uri: baseUrl + campsite.image }}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
-                    <Text
-                        style={{
-                            color: 'white',
-                            textAlign: 'center',
-                            fontSize: 20
-                        }}
-                    >
+                    <Text style={styles.cardText}>
                         {campsite.name}
                     </Text>
                     </View>
                 </Card.Image>
                 <Text style={{ margin: 20 }}>{campsite.description}</Text>
-                <Icon 
-                    onPress={() =>
-                        props.isFavorite
-                            ? console.log('Already set as a favorite')
-                            : props.markFavorite()
-                    }
-                    name={props.isFavorite ? 'heart' : 'heart-o'}
-                    type='font-awesome'
-                    color='#f50'
-                    raised
-                    reverse
-                />
+                <View style={styles.cardRow}>
+                    <Icon 
+                        onPress={() =>
+                            props.isFavorite
+                                ? console.log('Already set as a favorite')
+                                : props.markFavorite()
+                        }
+                        name={props.isFavorite ? 'heart' : 'heart-o'}
+                        type='font-awesome'
+                        color='#f50'
+                        raised
+                        reverse
+                    />
+                    <Icon
+                        onPress={() => props.onShowModal()}
+                        name='pencil'
+                        type='font-awesome'
+                        color='#5637DD'
+                        raised
+                        reverse
+                    />
+                </View>
             </Card>
         );
     }
@@ -44,6 +48,21 @@ const styles = StyleSheet.create({
         padding: 0,
         margin: 0,
         marginBottom: 20
+    },
+    cardRow: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        margin: 20
+    },
+    cardText: {
+        textShadowColor: 'rgba(0, 0, 0, 1)',
+        textShadowOffset: { width: -1, height: 1 },
+        textShadowRadius: 20,
+        textAlign: 'center',
+        color: 'white',
+        fontSize: 20
     }
 });
 
